@@ -1,0 +1,125 @@
+.quote {
+  width: 60%;
+  height: 35vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 2rem;
+  color: white;
+  padding: 1.5rem;
+  border: 1px solid gray;
+  border-radius: 2rem;
+  .pic {
+    height: 5rem;
+    width: 5rem;
+    color: white;
+    .pp {
+      width: auto;
+      height: 5vh;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+  }
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+  .lss {
+    button {
+      background-color: black;
+    }
+  }
+}
+
+.like {
+  z-index: 999;
+  color: red !important;
+  font-size: 1.2em;
+}
+.comment-box {
+  width: 100%;
+  padding: 8px;
+  margin: 8px 0;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  resize: vertical;
+  color: white;
+}
+
+.comment-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.quote {
+  background-color: #000000;
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.quote.expanded {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  width: 100%;
+  height: 100vh;
+  max-width: 800px;
+  padding: 40px;
+  overflow: auto;
+  background-color: #000000;
+  border-radius: 10px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+}
+
+.close-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.close-button svg {
+  color: white;
+  font-size: 1.2rem;
+}
+
+@media screen and (max-width: 760px) {
+  .quote {
+    @media screen and (max-width: 760px) {
+      width: 76%;
+      height: 22vh;
+      gap: 1rem;
+    }
+    .comment-box {
+      padding: 4px;
+      margin: 4px 0;
+      font-size: 0.8rem;
+    }
+    .comment-button {
+      padding: 4px 8px;
+      font-size: 0.8rem;
+    }
+   
+  }
+  .content {
+    font-size: 0.75rem;
+  }
+  .quote.expanded {
+
+ 
+    width: 79% !important;
+  }
+}

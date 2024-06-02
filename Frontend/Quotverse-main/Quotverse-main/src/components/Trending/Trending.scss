@@ -1,0 +1,60 @@
+.trending {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  .theading {
+    padding-bottom: 2.5rem;
+    font-size: 1.15rem;
+    font-weight: 800;
+  }
+  .trendingIteams {
+    display: flex;
+    flex-direction: column;
+    .Tdiv {
+      padding: 1rem;
+      font-size: 0.75rem;
+      > div {
+        letter-spacing: 1.5px;
+      }
+    }
+  }
+}
+@media screen and (max-width: 760px) {
+
+  .trending .theading {
+    font-size: 0.95rem;
+    font-weight: 700;
+    padding: 0.5rem;
+    align-items: flex-start;
+
+  }
+  .theading {
+    font-size: 1rem;
+  }
+
+  .trendingIteams {
+    .Tdiv {
+      padding: 0.7rem !important;
+      font-size: 0.55rem !important;
+    }
+  }
+  .Tdiv2{
+    font-size: 0.75rem !important;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .theading {
+    font-size: 0.9rem;
+  }
+
+  .trendingIteams {
+    .Tdiv {
+      padding: 0.3rem;
+      font-size: 0.8rem;
+    }
+  }
+}

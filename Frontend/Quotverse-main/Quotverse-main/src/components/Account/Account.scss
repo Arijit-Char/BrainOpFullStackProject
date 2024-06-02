@@ -1,0 +1,81 @@
+.account {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4rem;
+  margin-right: -8vw !important;
+  .profilepic {
+    height: 5rem;
+    width: 5rem;
+    .pp {
+      width: auto;
+      height: 10vh;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+  }
+  .name-user {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .totallikes {
+    > span {
+      font-size: 1.15rem;
+      font-weight: 400;
+    }
+  }
+  .name {
+    font-size: 2rem;
+  }
+  .title {
+    font-weight: 800;
+  }
+  .username {
+    color: rgb(177, 177, 177);
+  }
+}
+@media screen and (max-width: 760px) {
+  .account {
+    gap: 1rem;
+    padding: 1rem;
+    border-bottom: 1px solid white;
+    padding-bottom: 1.5rem;
+    .name-user {
+      font-size: 0.75rem;
+    }
+  }
+  .title {
+    font-size: 0.75rem;
+  }
+  .totallikes {
+    font-size: 0.75rem;
+  }
+  .profilepic {
+    height: 2.5rem !important;
+    width: 2.5rem !important;
+
+    .pp {
+      height: 6vh !important;
+    }
+  }
+}
+@media screen and (max-width: 576px) {
+  .account {
+    gap: 0.5rem;
+  }
+
+  .profilepic {
+    height: 2rem !important;
+    width: 2rem !important;
+
+    .pp {
+      height: 5vh !important;
+    }
+  }
+
+  .name-user {
+    gap: 0.5rem;
+  }
+}
