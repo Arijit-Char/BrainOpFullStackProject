@@ -33,7 +33,9 @@ export default function Registration() {
   };
 
   React.useEffect(() => {
-    if (message) {
+    if (localStorage.getItem("token")) {
+      navigate("/cont");
+    } else if (message) {
       const expirationTime = new Date().getTime() + 24 * 60 * 60 * 1000;
       const item = {
         token: message,

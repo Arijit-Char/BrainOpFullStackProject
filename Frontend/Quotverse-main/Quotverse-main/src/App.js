@@ -17,9 +17,7 @@ function App() {
       }
     }
   }, []);
-  if (localStorage.getItem("token")) {
-    return <Allcontent />;
-  }
+
   return (
     <Router>
 
