@@ -36,7 +36,6 @@ export default function Login() {
   const { message, error } = useSelector((state) => state.login);
   const [isChecked, setIsChecked] = React.useState(false);
   const [showPassword, setShowPassword] = React.useState(false);
-  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -116,7 +115,11 @@ export default function Login() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
-                autoFocus
+                type="email"
+                inputProps={{
+                  pattern: "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+                  title: "Enter a valid email address",
+                }}
               />
               <TextField
                 margin="normal"

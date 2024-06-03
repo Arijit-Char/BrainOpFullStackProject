@@ -127,6 +127,11 @@ export default function Registration() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                type="email"
+                inputProps={{
+                  pattern: "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+                  title: "Enter a valid email address",
+                }}
               />
               <TextField
                 margin="normal"
