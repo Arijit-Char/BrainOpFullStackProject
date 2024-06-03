@@ -26,8 +26,16 @@ export default function Registration() {
   const navigate = useNavigate();
   const { message, error } = useSelector((state) => state.register);
 
+  const [isChecked, setIsChecked] = React.useState(false);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (!isChecked) {
+      toast.error("Please accept the terms and conditions.", {
+        position: "bottom-center",
+      });
+      return;
+    }
     const formData = new FormData(event.currentTarget);
     const data = {
       name: formData.get("name"),
@@ -58,8 +66,20 @@ export default function Registration() {
     }
   }, [error, message, dispatch]);
 
+  const handleCheckboxChange = () => {
+    setIsChecked(!isChecked);
+  };
+
   return (
-    <div style={{ backgroundColor: "#121212", minHeight: "100vh", display: "flex", justifyContent: "center", alignItems: "center" }}>
+    <div
+      style={{
+        backgroundColor: "#121212",
+        minHeight: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <ThemeProvider theme={defaultTheme}>
         <Container component="main" maxWidth="xs">
           <CssBaseline />
@@ -77,12 +97,7 @@ export default function Registration() {
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
-            <Box
-              component="form"
-              onSubmit={handleSubmit}
-              noValidate
-              sx={{ mt: 1 }}
-            >
+            <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
               <TextField
                 margin="normal"
                 required
@@ -112,11 +127,16 @@ export default function Registration() {
                 id="password"
                 autoComplete="current-password"
               />
+              <label>
+                <input type="checkbox" onChange={handleCheckboxChange} />
+                Accept terms and conditions
+              </label>
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
+                disabled={!isChecked}
               >
                 Sign In
               </Button>

@@ -32,9 +32,16 @@ export default function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { message, error } = useSelector((state) => state.login);
+  const [isChecked, setIsChecked] = React.useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (!isChecked) {
+      toast.error("Please accept the terms and conditions.", {
+        position: "bottom-center",
+      });
+      return;
+    }
     const formData = new FormData(event.currentTarget);
     const data = {
       email: formData.get("email"),
@@ -61,6 +68,10 @@ export default function Login() {
       console.error("Error logging in:", error);
     }
   }, [error, message, dispatch]);
+
+  const handleCheckboxChange = () => {
+    setIsChecked(!isChecked);
+  };
 
   return (
     <div>
@@ -107,11 +118,16 @@ export default function Login() {
                 id="password"
                 autoComplete="current-password"
               />
+              <label>
+                <input type="checkbox" onChange={handleCheckboxChange} />
+                Accept terms and conditions
+              </label>
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
+                disabled={!isChecked}
               >
                 Login
               </Button>
