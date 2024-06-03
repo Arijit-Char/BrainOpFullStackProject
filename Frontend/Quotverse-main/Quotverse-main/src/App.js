@@ -17,15 +17,14 @@ function App() {
       }
     }
   }, []);
-
   return (
     <Router>
 
+
       <Routes>
-        <Route path="/" element={<Registration />} />
+        <Route path="/" element={<Allcontent />} />
         <Route path="/registration" element={<Registration />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/cont" element={<Allcontent />} />
 
       </Routes>
       <Toaster />

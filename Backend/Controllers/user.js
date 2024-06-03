@@ -15,13 +15,15 @@ export const logout = (req, res) => {
         })
         .json({
             success: true,
-           message:"Logout was successful"
+            message: "Logout was successful"
         });
 };
 
 export const login = async (req, res, next) => {
     try {
         const { email, password } = req.body;
+        if (!email || !password) return next(new ErrorHandler("Please fill in all fields", 400));
+
         const user = await User.findOne({ email }).select("+password");
         if (!user) return next(new ErrorHandler("user not found", 400));
         const isMatch = await bcrypt.compare(password, user.password);
@@ -35,6 +37,7 @@ export const login = async (req, res, next) => {
 export const register = async (req, res, next) => {
     try {
         const { name, email, password } = req.body;
+        if (!name || !email || !password) return next(new ErrorHandler("Please fill in all fields", 400));
         let user = await User.findOne({ email });
         if (user) return next(new ErrorHandler("User already exists", 400));
         const hashedPassword = bcrypt.hashSync(password, 10);

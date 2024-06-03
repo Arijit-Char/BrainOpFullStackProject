@@ -26,7 +26,7 @@ export const register = (name, email, password) => async (dispatch) => {
             type: "Get_Register_Success",
             payload: data.message,
         });
-        
+
     } catch (error) {
         dispatch({
             type: "Get_Register_Failure",
@@ -73,7 +73,9 @@ export const logout = () => async (dispatch) => {
             type: "Get_Logout_Request",
         });
 
-        const { data } = await axios.get("http://localhost:5000/api/users/logout");
+        const { data } = await axios.get("http://localhost:5000/api/users/logout", {
+            withCredentials: true,
+        });
 
         dispatch({
             type: "Get_Logout_Success",

@@ -30,18 +30,23 @@ function Allcontent() {
   const navigate = useNavigate();
   const { message, error } = useSelector((state) => state.logout);
 
-  useEffect(() => {
-    if (message) {
+  const handleLogout = async () => {
+    dispatch(logout());
+  };
+
+  React.useEffect(() => {
+    if (localStorage.getItem("token") === null) {
+      navigate("/login");
+    } else if (message) {
       localStorage.removeItem("token");
       toast.success(message, { position: "bottom-center" });
-      navigate("/");
+      navigate("/login");
     } else if (error) {
-      toast.error(error, {
-        position: "bottom-center",
-      });
+      toast.error(error, { position: "bottom-center" });
       console.error("Error logging in:", error);
     }
-  }, [error, message, dispatch,navigate]);
+  }, [error, message, dispatch, navigate]);
+
   useEffect(() => {
     dispatch(getQuote(page));
   }, [dispatch, page]);
@@ -133,12 +138,7 @@ function Allcontent() {
   const handleToggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
-  if (!localStorage.getItem("token")) {
-    return <div>Unauthorized ! Please do the Registration first</div>;
-  }
-  const handleLogout = async () => {
-    dispatch(logout());
-  };
+
   return (
     <div className="App">
       <div className="heading">

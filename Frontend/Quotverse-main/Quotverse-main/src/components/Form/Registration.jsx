@@ -48,9 +48,7 @@ export default function Registration() {
   };
 
   React.useEffect(() => {
-    if (localStorage.getItem("token")) {
-      navigate("/cont");
-    } else if (message) {
+    if (message) {
       const expirationTime = new Date().getTime() + 24 * 60 * 60 * 1000;
       const item = {
         token: message,
@@ -61,7 +59,7 @@ export default function Registration() {
       toast.success("Welcome! You have successfully signed up.", {
         position: "bottom-center",
       });
-      navigate("/cont");
+      navigate("/");
     } else if (error) {
       toast.error(error, {
         position: "bottom-center",
@@ -142,7 +140,11 @@ export default function Registration() {
                 InputProps={{
                   endAdornment: (
                     <Button onClick={togglePasswordVisibility}>
-                      {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                      {showPassword ? (
+                        <VisibilityOffIcon />
+                      ) : (
+                        <VisibilityIcon />
+                      )}
                     </Button>
                   ),
                 }}

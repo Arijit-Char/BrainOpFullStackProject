@@ -20,12 +20,12 @@ import { login } from "../../action/user";
 // Define your dark theme
 const darkTheme = createTheme({
   palette: {
-    mode: 'dark',
+    mode: "dark",
     primary: {
-      main: '#90caf9', // Adjust this to your primary color
+      main: "#90caf9", // Adjust this to your primary color
     },
     secondary: {
-      main: '#f48fb1', // Adjust this to your secondary color
+      main: "#f48fb1", // Adjust this to your secondary color
     },
   },
 });
@@ -36,6 +36,7 @@ export default function Login() {
   const { message, error } = useSelector((state) => state.login);
   const [isChecked, setIsChecked] = React.useState(false);
   const [showPassword, setShowPassword] = React.useState(false);
+  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -62,15 +63,17 @@ export default function Login() {
       };
 
       localStorage.setItem("token", JSON.stringify(item));
-      toast.success("Welcome! You have successfully logged in.", { position: "bottom-center" });
-      navigate("/cont");
+      toast.success("Welcome! You have successfully logged in.", {
+        position: "bottom-center",
+      });
+      navigate("/");
     } else if (error) {
       toast.error(error, {
         position: "bottom-center",
       });
       console.error("Error logging in:", error);
     }
-  }, [error, message, dispatch, navigate]);
+  }, [error, message, dispatch]);
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
@@ -127,7 +130,11 @@ export default function Login() {
                 InputProps={{
                   endAdornment: (
                     <Button onClick={togglePasswordVisibility}>
-                      {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                      {showPassword ? (
+                        <VisibilityOffIcon />
+                      ) : (
+                        <VisibilityIcon />
+                      )}
                     </Button>
                   ),
                 }}
