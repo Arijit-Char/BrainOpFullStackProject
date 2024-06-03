@@ -12,17 +12,6 @@ const schema = mongoose.Schema({
         select: false,
         unique: true,
     },
-    resume: {
-        type: String,
-        default: "",
-    },
-    targetedjobs: {
-        type: [String],
-        default: [],
-    },
-    createdAt: {
-        type: Date,
-        default: Date.now,
-    }
+
 });
 export const User = mongoose.model("User", schema);
