@@ -7,6 +7,8 @@ import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -33,6 +35,7 @@ export default function Login() {
   const navigate = useNavigate();
   const { message, error } = useSelector((state) => state.login);
   const [isChecked, setIsChecked] = React.useState(false);
+  const [showPassword, setShowPassword] = React.useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -59,7 +62,7 @@ export default function Login() {
       };
 
       localStorage.setItem("token", JSON.stringify(item));
-      toast.success(message, { position: "bottom-center" });
+      toast.success("Welcome! You have successfully logged in.", { position: "bottom-center" });
       navigate("/cont");
     } else if (error) {
       toast.error(error, {
@@ -67,10 +70,14 @@ export default function Login() {
       });
       console.error("Error logging in:", error);
     }
-  }, [error, message, dispatch]);
+  }, [error, message, dispatch, navigate]);
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
 
   return (
@@ -114,9 +121,16 @@ export default function Login() {
                 fullWidth
                 name="password"
                 label="Password"
-                type="password"
+                type={showPassword ? "text" : "password"}
                 id="password"
                 autoComplete="current-password"
+                InputProps={{
+                  endAdornment: (
+                    <Button onClick={togglePasswordVisibility}>
+                      {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                    </Button>
+                  ),
+                }}
               />
               <label>
                 <input type="checkbox" onChange={handleCheckboxChange} />

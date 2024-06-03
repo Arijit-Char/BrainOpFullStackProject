@@ -7,6 +7,8 @@ import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -25,8 +27,8 @@ export default function Registration() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { message, error } = useSelector((state) => state.register);
-
   const [isChecked, setIsChecked] = React.useState(false);
+  const [showPassword, setShowPassword] = React.useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -56,18 +58,24 @@ export default function Registration() {
       };
 
       localStorage.setItem("token", JSON.stringify(item));
-      toast.success(message, { position: "bottom-center" });
+      toast.success("Welcome! You have successfully signed up.", {
+        position: "bottom-center",
+      });
       navigate("/cont");
     } else if (error) {
       toast.error(error, {
         position: "bottom-center",
       });
-      console.error("Error logging in:", error);
+      console.error("Error signing up:", error);
     }
-  }, [error, message, dispatch]);
+  }, [error, message, dispatch, navigate]);
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
 
   return (
@@ -97,7 +105,12 @@ export default function Registration() {
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
-            <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+            <Box
+              component="form"
+              onSubmit={handleSubmit}
+              noValidate
+              sx={{ mt: 1 }}
+            >
               <TextField
                 margin="normal"
                 required
@@ -123,9 +136,16 @@ export default function Registration() {
                 fullWidth
                 name="password"
                 label="Password"
-                type="password"
+                type={showPassword ? "text" : "password"}
                 id="password"
                 autoComplete="current-password"
+                InputProps={{
+                  endAdornment: (
+                    <Button onClick={togglePasswordVisibility}>
+                      {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                    </Button>
+                  ),
+                }}
               />
               <label>
                 <input type="checkbox" onChange={handleCheckboxChange} />
